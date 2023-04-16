@@ -10,6 +10,10 @@ interface ButtonProps {
   outline?: boolean
   icon?: IconType
   small?: boolean
+  google?: boolean
+  apple?: boolean
+  facebook?: boolean
+  login?: boolean
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -20,19 +24,35 @@ const Button: React.FC<ButtonProps> = ({
   small,
   onClick,
   icon: Icon,
+  google,
+  apple,
+  facebook,
+  login,
 }) => {
   return (
     <button
       disabled={disabled}
       onClick={onClick}
-      className={`relative disabled:opacity-70 disabled:cursor-not-allowed hover:opacity-80 transition px-6 ml-4 py-3
+      className={`relative w-full disabled:opacity-70 disabled:cursor-not-allowed hover:opacity-80 transition py-3 border-[2px] rounded-lg font-bold
         ${primary ? 'bg-blue-400' : 'bg-white'}
-        ${primary ? 'rounded-lg' : ''}
-        ${primary ? 'font-bold' : ''}
         ${primary ? 'text-white' : 'text-black'}
         ${small ? 'px-0, m-0' : ''}
+        ${google ? 'bg-white' : ''}
+        ${apple ? 'bg-black' : ''}
+        ${facebook ? 'bg-blue-800' : ''}
+        ${login ? 'w-fit-content' : ''}
+        ${login ? 'px-6' : ''}
+        ${login ? 'py-1' : ''}
+
+
       `}
     >
+      {Icon && (
+        <Icon
+          size={24}
+          className={`absolute left-4 top-3 ${apple && 'color-white'}`}
+        />
+      )}
       {cta}
     </button>
   )

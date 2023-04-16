@@ -21,7 +21,7 @@ const Navbar = () => {
           gap-3
           md:gap-0"
           >
-            <div className="flex 0.33 flex-row justify-items-start justify-stretch left">
+            <div className="flex 0.33 flex-row justify-items-start items-center justify-stretch left">
               <Logo />
               <DeliveryTo />
             </div>

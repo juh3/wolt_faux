@@ -1,30 +1,15 @@
 'use client'
 import React, { useCallback, useState } from 'react'
 import Button from '../Button'
+import useRegisterModal from '../hooks/useRegisterModal'
 
 const LoginButtons = () => {
-  const [isOpen, setIsOpen] = useState(false)
-
-  const toggleOpen = useCallback(() => {
-    setIsOpen((value) => !value)
-  }, [])
+  const registerModal = useRegisterModal()
 
   return (
-    <div>
-      <Button
-        cta="Log in"
-        onClick={() => {
-          toggleOpen()
-        }}
-        small
-      />
-      <Button
-        primary
-        cta="Sign up"
-        onClick={() => {
-          toggleOpen()
-        }}
-      />
+    <div className="flex flex-row p-6">
+      <Button cta="Log in" onClick={registerModal.onOpen} small login />
+      <Button primary cta="Sign up" onClick={registerModal.onOpen} login />
     </div>
   )
 }

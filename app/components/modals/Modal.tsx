@@ -2,14 +2,17 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { AiOutlineClose } from 'react-icons/ai'
 import { FcGoogle } from 'react-icons/fc'
+import { AiFillApple } from 'react-icons/ai'
+import { RiFacebookCircleFill } from 'react-icons/ri'
 import Button from '../Button'
+import Input from '../Input'
 interface ModalProps {
   isOpen?: boolean
   onClose: () => void
   onSubmit: () => void
   title?: string
-  body?: string
-  footer?: string
+  body?: React.ReactElement
+  footer?: React.ReactElement
   disabled?: boolean
   subtitle?: string
 }
@@ -57,7 +60,7 @@ const Modal: React.FC<ModalProps> = ({
           className="
           relative
           w-full
-          md:w-2/6
+          md:w-1/3
           lg: w-3/6
           xl: w-2/5
           my-6
@@ -103,21 +106,20 @@ const Modal: React.FC<ModalProps> = ({
                 >
                   <AiOutlineClose size={28} />
                 </button>
-                <div className="flex flex-col absolute left-8 top-12">
-                  <div className="text-lg font-semibold">{title}</div>
-                  <div className="text-md font-light">{subtitle}</div>
-                </div>
+              </div>
+              {/*body */}
+              <div className="relative pl-6 flex-auto">
+                <div className="text-3xl font-semibold pb-2">{title}</div>
+                <div className="text-sm font-light">{subtitle}</div>
               </div>
               {/*body*/}
-              <div className="relative p-6 flex-auto">{body}</div>
 
-              {/*Footer */}
-              <div className="flex flex-col gap-2 p-6">
-                <div className="flex flex-col items-center gap-4 w-full">
-                  <Button cta="login" primary icon={FcGoogle} />
-                  <Button cta="login" primary />
-                  <Button cta="login" primary />
+              <div className="flex flex-col gap-2 p-6">{body}</div>
+              <div className="gap-2 wrap px-6 pb-4">
+                <div className="">
+                  <Button cta="Next" primary onClick={handleSubmit} />
                 </div>
+                <div>{footer}</div>
               </div>
             </div>
           </div>

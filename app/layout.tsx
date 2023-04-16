@@ -1,4 +1,4 @@
-import Modal from './components/modals/Modal'
+import RegisterModal from './components/modals/RegisterModal'
 import Navbar from './components/navbar/Navbar'
 import './globals.css'
 import { Roboto } from 'next/font/google'
@@ -8,7 +8,7 @@ export const metadata = {
 }
 
 const font = Roboto({
-  weight: '400',
+  weight: ['300', '400', '700'],
   subsets: ['latin'],
 })
 export default function RootLayout({
@@ -19,11 +19,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={font.className}>
-        <Modal
-          isOpen
-          title="Create an account or log in"
-          subtitle="Log in below or create a new Wolt account."
-        />
+        <RegisterModal />
+
         <Navbar />
 
         {children}
