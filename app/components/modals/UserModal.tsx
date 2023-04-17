@@ -10,7 +10,7 @@ import Button from '../Button'
 import { RiFacebookCircleFill } from 'react-icons/ri'
 import { AiFillApple } from 'react-icons/ai'
 import Input from '../Input'
-const RegisterModal = () => {
+const UserModal = () => {
   const registerModal = useRegisterModal()
   const [isLoading, setIsLoading] = useState(false)
 
@@ -26,7 +26,8 @@ const RegisterModal = () => {
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true)
-
+    // if email in database -> LoginModal
+    // if email not in database -> RegisterModal
     axios
       .post('/api/register', data)
       .then(() => registerModal.onClose())
@@ -85,4 +86,4 @@ const RegisterModal = () => {
     />
   )
 }
-export default RegisterModal
+export default UserModal

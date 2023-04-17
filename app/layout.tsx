@@ -1,4 +1,4 @@
-import RegisterModal from './components/modals/RegisterModal'
+import UserModal from './components/modals/UserModal'
 import Navbar from './components/navbar/Navbar'
 import './globals.css'
 import { Roboto } from 'next/font/google'
@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={font.className}>
-        <RegisterModal />
+        <UserModal />
 
         <Navbar />
 
