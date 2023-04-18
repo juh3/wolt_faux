@@ -1,7 +1,7 @@
 'use client'
 import React, { useCallback, useState } from 'react'
 import Button from '../Button'
-import useRegisterModal from '../hooks/useRegisterModal'
+import useRegisterModal from '../hooks/useUserModal'
 
 const LoginButtons = () => {
   const registerModal = useRegisterModal()

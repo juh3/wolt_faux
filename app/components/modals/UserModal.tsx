@@ -2,16 +2,20 @@
 import axios from 'axios'
 import React, { useCallback, useState } from 'react'
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form'
-
+import useLoginModal from '../hooks/useLoginModal'
 import useRegisterModal from '../hooks/useRegisterModal'
+import useUserModal from '../hooks/useUserModal'
 import Modal from './Modal'
 import { FcGoogle } from 'react-icons/fc'
 import Button from '../Button'
 import { RiFacebookCircleFill } from 'react-icons/ri'
 import { AiFillApple } from 'react-icons/ai'
 import Input from '../Input'
+import { setCookie } from 'cookies-next'
 const UserModal = () => {
+  const userModal = useUserModal()
   const registerModal = useRegisterModal()
+  const loginModal = useLoginModal()
   const [isLoading, setIsLoading] = useState(false)
 
   const {
@@ -24,19 +28,23 @@ const UserModal = () => {
     },
   })
 
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     setIsLoading(true)
     // if email in database -> LoginModal
     // if email not in database -> RegisterModal
-    axios
-      .post('/api/register', data)
-      .then(() => registerModal.onClose())
-      .catch((error) => {
-        console.log(errors)
-      })
-      .finally(() => {
-        setIsLoading(false)
-      })
+    const response = await axios.post('/api/checkuser', data)
+
+    if (response.data.user_exists === 'true') {
+      console.log(response.data)
+      setCookie('email', response.data.email)
+      loginModal.onOpen()
+    } else {
+      setCookie('email', response.data.email)
+
+      registerModal.onOpen()
+    }
+    userModal.onClose()
+    setIsLoading(false)
   }
 
   const body = (
@@ -76,11 +84,11 @@ const UserModal = () => {
   return (
     <Modal
       disabled={isLoading}
-      isOpen={registerModal.isOpen}
+      isOpen={userModal.isOpen}
       title="Create an account or log in"
       subtitle="Log in below or create a new Wolt account."
       body={body}
-      onClose={registerModal.onClose}
+      onClose={userModal.onClose}
       onSubmit={handleSubmit(onSubmit)}
       footer={footer}
     />

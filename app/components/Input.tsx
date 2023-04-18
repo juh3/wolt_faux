@@ -10,6 +10,7 @@ interface InputProps {
   disabled?: boolean
   register: UseFormRegister<FieldValues>
   errors: FieldErrors
+  small?: boolean
 }
 
 const Input: React.FC<InputProps> = ({
@@ -20,6 +21,7 @@ const Input: React.FC<InputProps> = ({
   errors,
   required,
   disabled,
+  small,
 }) => {
   return (
     <div className="w-full relative">
@@ -43,6 +45,7 @@ const Input: React.FC<InputProps> = ({
         focus:border-[3px]
         ${errors[id] ? 'border-rose-500' : ''}
         ${errors[id] ? 'focus:border-rose-500' : 'focus:border-blue-400'}
+        ${small ? 'w-3/6' : ''}
         `}
       />
       <label
@@ -50,7 +53,7 @@ const Input: React.FC<InputProps> = ({
         absolute 
         text-md 
         duration-150 
-        top-4 
+        top-3 
         left-4 
         -translate-y-3 
         transform 
