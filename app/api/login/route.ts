@@ -9,11 +9,11 @@ export async function POST(request: Request) {
     where: email,
   })
   const password_correct =
-    user === null ? false : await bcrypt.compare(password, user.password)
+    user === null ? false : await bcrypt.compare(password, user.hashed_password)
 
   if (!user || !password_correct) {
     return NextResponse.json({ error: 'invalid username or password' })
   }
 
-  return NextResponse.json({ email: email, name: user.name })
+  return NextResponse.json({ email: email, firstname: user.firstname })
 }
