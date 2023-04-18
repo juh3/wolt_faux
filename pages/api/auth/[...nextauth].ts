@@ -32,13 +32,13 @@ export const authOptions: AuthOptions = {
             email: credentials.email,
           },
         })
-        if (!user || !user.password) {
+        if (!user || !user.hashed_password) {
           throw new Error('Invalid credentials')
         }
 
         const isCorrectPassword = await bcrypt.compare(
           credentials.password,
-          user.password
+          user.hashed_password
         )
         if (!isCorrectPassword) {
           throw new Error('Invalid credentials')

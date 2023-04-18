@@ -11,7 +11,7 @@ async function main() {
       hashed_password: hashed_password,
       firstname: 'Test',
       lastname: 'Tester',
-      dob: new Date(12 / 12 / 2022),
+      dob: '(12 / 12 / 2022',
     },
   })
 }
