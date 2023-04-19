@@ -7,10 +7,17 @@ import DeliveryTo from '../DeliveryTo'
 import Search from './Search'
 import Button from '../Button'
 import LoginButtons from './LoginButtons'
-const Navbar = () => {
+import { User } from '@prisma/client'
+import Avatar from './Avatar'
+
+interface NavbarProps {
+  currentUser?: User | null
+}
+
+const Navbar: React.FC<NavbarProps> = ({ currentUser }) => {
   return (
     <div className="fixed w-full bg-white z-10 border-b-2 border-light-grey">
-      <div className="py-4">
+      <div className="py-1">
         <Container>
           <div
             className="
@@ -28,8 +35,9 @@ const Navbar = () => {
             <div className="flex 0.33 flex-row items-center">
               <Search />
             </div>
-            <div className="flex md:order-2">
-              <LoginButtons />
+            <div className="flex md:order-3">
+              {!currentUser && <LoginButtons />}
+              {currentUser && <Avatar />}
             </div>
           </div>
         </Container>

@@ -6,9 +6,11 @@ import axios from 'axios'
 import useLoginModal from '../hooks/useLoginModal'
 import Input from '../Input'
 import { getCookie, hasCookie } from 'cookies-next'
-
+import { signIn } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 const LoginModal = () => {
-  const userModal = useLoginModal()
+  const router = useRouter()
+  const loginModal = useLoginModal()
   const [isLoading, setIsLoading] = useState(false)
   let email
   if (hasCookie('email')) {
@@ -27,7 +29,21 @@ const LoginModal = () => {
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     setIsLoading(true)
     //POST to /login
-    const response = await axios.post('/login', data)
+    //const response = await axios.post('/login', data)
+    signIn('credentials', {
+      ...data,
+      redirect: false,
+    }).then((callback) => {
+      if (callback?.ok) {
+        console.log('success signing in!')
+        setIsLoading(false)
+        router.refresh()
+        loginModal.onClose()
+      }
+      if (callback?.error) {
+        console.error('could not sign in :(')
+      }
+    })
   }
 
   const body = (
@@ -55,11 +71,11 @@ const LoginModal = () => {
   return (
     <Modal
       disabled={isLoading}
-      isOpen={userModal.isOpen}
+      isOpen={loginModal.isOpen}
       title="Log in below"
       subtitle="Log in below with your Wolt account."
       body={body}
-      onClose={userModal.onClose}
+      onClose={loginModal.onClose}
       onSubmit={handleSubmit(onSubmit)}
     />
   )

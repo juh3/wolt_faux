@@ -1,15 +1,15 @@
 'use client'
 import React, { useCallback, useState } from 'react'
 import Button from '../Button'
-import useRegisterModal from '../hooks/useUserModal'
+import useUserModal from '../hooks/useUserModal'
 
 const LoginButtons = () => {
-  const registerModal = useRegisterModal()
+  const userModal = useUserModal()
 
   return (
-    <div className="flex flex-row p-6">
-      <Button cta="Log in" onClick={registerModal.onOpen} small login />
-      <Button primary cta="Sign up" onClick={registerModal.onOpen} login />
+    <div className="flex flex-row pr-2">
+      <Button cta="Log in" onClick={userModal.onOpen} small login />
+      <Button primary cta="Sign up" onClick={userModal.onOpen} login />
     </div>
   )
 }

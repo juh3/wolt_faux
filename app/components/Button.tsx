@@ -37,11 +37,12 @@ const Button: React.FC<ButtonProps> = ({
         ${primary ? 'bg-blue-400' : 'bg-white'}
         ${primary ? 'text-white' : 'text-black'}
         ${small ? 'px-0, m-0' : ''}
+        ${small ? 'border-[0px]' : ''}
         ${google ? 'bg-white' : ''}
         ${apple ? 'bg-black' : ''}
         ${facebook ? 'bg-blue-800' : ''}
         ${login ? 'w-fit-content' : ''}
-        ${login ? 'px-6' : ''}
+        ${login ? 'px-8' : ''}
         ${login ? 'py-1' : ''}
 
 

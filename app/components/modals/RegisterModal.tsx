@@ -12,7 +12,6 @@ const RegisterModal = () => {
   const [isLoading, setIsLoading] = useState(false)
   let email
   if (hasCookie('email')) {
-    console.log('i have COOKIE')
     email = getCookie('email')
   }
 
@@ -98,8 +97,8 @@ const RegisterModal = () => {
     <Modal
       disabled={isLoading}
       isOpen={registerModal.isOpen}
-      title="Create an account or log in"
-      subtitle="Log in below or create a new Wolt account."
+      title="Register below"
+      subtitle="Create a new Wolt account."
       body={body}
       onClose={registerModal.onClose}
       onSubmit={handleSubmit(onSubmit)}
