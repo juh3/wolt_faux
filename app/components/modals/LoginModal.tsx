@@ -16,7 +16,7 @@ const LoginModal = () => {
   if (hasCookie('email')) {
     email = getCookie('email')
   }
-
+  console.log(email)
   const {
     register,
     handleSubmit,

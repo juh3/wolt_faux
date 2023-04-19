@@ -1,20 +1,25 @@
 'use client'
 
-import React from 'react'
+import React, { useCallback, useState } from 'react'
 import Container from '../Container'
 import Logo from './Logo'
 import DeliveryTo from '../DeliveryTo'
 import Search from './Search'
-import Button from '../Button'
 import LoginButtons from './LoginButtons'
 import { User } from '@prisma/client'
 import Avatar from './Avatar'
+import { FiChevronDown } from 'react-icons/fi'
+import UserMenu from './UserMenu'
 
 interface NavbarProps {
   currentUser?: User | null
 }
 
 const Navbar: React.FC<NavbarProps> = ({ currentUser }) => {
+  const [isOpen, setIsOpen] = useState(false)
+  const toggleOpen = useCallback(() => {
+    setIsOpen((value) => !value)
+  }, [])
   return (
     <div className="fixed w-full bg-white z-10 border-b-2 border-light-grey">
       <div className="py-1">
@@ -36,8 +41,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentUser }) => {
               <Search />
             </div>
             <div className="flex md:order-3">
-              {!currentUser && <LoginButtons />}
-              {currentUser && <Avatar />}
+              <UserMenu currentUser={currentUser} />
             </div>
           </div>
         </Container>
